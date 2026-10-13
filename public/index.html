@@ -13,13 +13,22 @@
     <!-- #1 Create session (presenter) -->
     <section id="create-section">
       <h2>I'm the presenter</h2>
-      <p>TODO #1: button "Create session"</p>
+      <button id="create-btn">Create session</button>
+      <div id="create-result" hidden>
+        <p>Share this code with your audience:</p>
+        <p class="code" id="new-code"></p>
+        <a id="open-session-link" href="#">Open session &rarr;</a>
+      </div>
     </section>
 
     <!-- #2 Join session with code (participant) -->
     <section id="join-section">
       <h2>I'm a participant</h2>
-      <p>TODO #2: input for the code + button "Join"</p>
+      <form id="join-form">
+        <input type="text" id="join-code" placeholder="Session code, e.g. AB12" maxlength="4" required>
+        <button type="submit">Join</button>
+      </form>
+      <p id="join-error" class="error"></p>
     </section>
   </main>
 
