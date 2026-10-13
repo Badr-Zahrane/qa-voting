@@ -1,0 +1,13 @@
+{
+  "name": "qa-voting",
+  "version": "0.1.0",
+  "description": "Q&A Voting App - Software Engineering 2026/27 (unibz)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.4.1",
+    "express": "^5.1.0"
+  }
+}
