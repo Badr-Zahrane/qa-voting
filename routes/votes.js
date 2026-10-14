@@ -4,7 +4,32 @@ const db = require('../db');
 
 const router = express.Router();
 
-// TODO #5: POST /api/questions/:id/upvote  -> votes + 1, return the new number of votes
-// TODO #6: sorting by votes -> "ORDER BY votes DESC" in the GET of #4 (agree with Zaighum)
+// Story #5: POST /api/questions/:id/upvote -> votes + 1, restituisce il nuovo numero di voti
+router.post('/:id/upvote', (req, res) => {
+  const { id } = req.params;
+
+  // Verifica che l'id sia un numero valido
+  const questionId = parseInt(id, 10);
+  if (isNaN(questionId)) {
+    return res.status(400).json({ error: 'Invalid question ID' });
+  }
+
+  // Incrementa il contatore dei voti
+  const stmt = db.prepare('UPDATE questions SET votes = votes + 1 WHERE id = ?');
+  const result = stmt.run(questionId);
+
+  // Se nessuna riga è stata modificata, la domanda non esiste
+  if (result.changes === 0) {
+    return res.status(404).json({ error: 'Question not found' });
+  }
+
+  // Recupera il valore aggiornato dei voti
+  const updatedQuestion = db.prepare('SELECT id, votes FROM questions WHERE id = ?').get(questionId);
+
+  res.json({
+    id: updatedQuestion.id,
+    votes: updatedQuestion.votes
+  });
+});
 
 module.exports = router;
