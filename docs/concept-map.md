@@ -3,39 +3,33 @@
 The concept map shows the central concepts of our domain (live questions during a lecture or event) and how they relate to each other.
 
 ```mermaid
-flowchart LR
+flowchart TB
+    Presenter([Presenter])
+    Participant([Participant])
+
     subgraph SM["Session Management"]
-        Presenter([Presenter])
-        Participant([Participant])
-        Session[Session]
-        Code[Session Code]
+        direction LR
+        Session[Session] -- has --> Code[Session Code]
     end
 
     subgraph QA["Questions & Voting"]
-        Question[Question]
-        Vote[Vote]
-        Ranking[Ranking]
+        direction LR
+        Question[Question] -- receives --> Vote[Vote]
+        Vote -- determines --> Ranking[Ranking]
     end
 
     subgraph IN["Insights"]
+        direction LR
+        AI([AI Assistant]) -- assigns --> Category[Category / Group]
         Chart[Top Questions Chart]
-        Category[Category / Group]
-        AI([AI Assistant])
     end
 
-    Presenter -- creates --> Session
-    Session -- is identified by --> Code
+    Presenter -- creates / closes --> Session
     Participant -- joins with --> Code
-    Presenter -- closes --> Session
     Session -- contains --> Question
-    Participant -- submits --> Question
-    Participant -- casts --> Vote
-    Vote -- is given to --> Question
-    Vote -- determines --> Ranking
-    Ranking -- orders --> Question
-    Presenter -- marks as answered / deletes --> Question
+    Participant -- submits / votes --> Question
+    Presenter -- answers / deletes --> Question
     Ranking -- is shown in --> Chart
-    AI -- groups / categorizes --> Question
     Question -- belongs to --> Category
 ```
 
