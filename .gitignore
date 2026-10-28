@@ -150,3 +150,6 @@ vite.config.ts.timestamp-*
 
 # Local database
 qa.sqlite
+
+# Local files from the Claude app
+Claude outputs/
