@@ -20,8 +20,12 @@ flowchart TB
     end
 
     subgraph IN["Insights"]
-        AI([AI Assistant]) -- assigns --> Category[Category / Group]
         Chart[Top Questions Chart]
+    end
+
+    subgraph AIC["AI Assistance"]
+        AI([AI Assistant]) -- assigns --> Category[Category]
+        AI -- builds --> Group[Group of similar questions]
     end
 
     Presenter -- creates / closes --> Session
@@ -30,6 +34,7 @@ flowchart TB
     Participant -- joins with --> Code
     Ranking -- is shown in --> Chart
     Question -- belongs to --> Category
+    Question -- is part of --> Group
 ```
 
 ## Ubiquitous Language (shared vocabulary)
@@ -44,19 +49,22 @@ flowchart TB
 | **Vote** | An upvote given by a participant to a question |
 | **Ranking** | The order of questions by number of votes |
 | **Answered** | State of a question the presenter has already answered |
-| **Category / Group** | Topic or cluster of similar questions (assigned by the AI) |
+| **Category** | Topic of a question (e.g. *Exam*, *Docker*), assigned by the AI |
+| **Group** | Set of very similar questions, built by the AI so the presenter answers them once |
 
 ## Bounded Contexts
 
 | Context | Concepts | Responsibility | Code |
 |---|---|---|---|
 | **Q&A Session** | Session, Session Code, Question, Vote, Ranking, Answered | Create and join sessions, submit and vote questions, sort by votes, mark as answered | `routes/sessions.js`, `routes/questions.js`, `routes/votes.js` |
-| **Insights** | Top Questions Chart, AI Assistant, Category / Group | Visualize and organize the questions of a session | later sprints |
+| **Insights** | Top Questions Chart | Visualize which questions matter most to the audience | Sprint 2 (#17) |
+| **AI Assistance** | AI Assistant, Category, Group | Categorize questions by topic and group similar ones | Sprint 2 (#20, #21) |
 
 ## Changes after feedback (Checkpoint 1)
 
 - *Session Management* and *Questions & Voting* were merged into one context, **Q&A Session**: session management alone was too small to be a bounded context.
 - In the session context the **Participant** only accesses the session (*joins with* the session code).
 - **Answered** was added as an explicit state of a question.
+- The **AI** became its own bounded context, **AI Assistance**, separated from *Insights* (Checkpoint 3).
 
-The AI is an external dependency: it is accessed only from the *Insights* context, behind a small adapter (anti-corruption layer), so its concepts do not leak into the core model.
+The AI is an external dependency: it is accessed only from the *AI Assistance* context, behind a small adapter (anti-corruption layer), so its concepts do not leak into the core model.
