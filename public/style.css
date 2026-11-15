@@ -45,3 +45,45 @@ input[type="text"] {
   font-weight: bold;
   letter-spacing: 4px;
 }
+
+/* #3 Submit question */
+#question-form {
+  display: flex;
+  gap: 8px;
+}
+
+#question-input {
+  flex: 1;
+  min-width: 0;
+}
+
+/* #4 Questions list */
+#questions-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.question-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.question-item:last-child { border-bottom: none; }
+
+.question-body { flex: 1; min-width: 0; }
+
+.question-text {
+  margin: 0 0 4px;
+  overflow-wrap: anywhere;
+}
+
+.question-date { color: #777; }
+
+.no-questions { color: #777; padding: 8px 0; }
+
+.upvote-btn:disabled { opacity: 0.6; cursor: default; }
