@@ -6,7 +6,8 @@ document.getElementById('create-btn').addEventListener('click', async () => {
   const session = await res.json();
 
   document.getElementById('new-code').textContent = session.code;
-  document.getElementById('open-session-link').href = `session.html?code=${session.code}`;
+  document.getElementById('open-session-link').href =
+    `presenter.html?code=${session.code}&key=${session.presenterKey}`;
   document.getElementById('create-result').hidden = false;
 });
 
