@@ -75,7 +75,11 @@ async function loadQuestions() {
       li.innerHTML = `
         <div class="question-body">
           <p class="question-text">${escapeHtml(q.text)}</p>
-          <small class="question-date">${new Date(q.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
+          <div class="question-meta">
+            <small class="question-date">${new Date(q.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
+            ${q.category ? `<span class="question-tag">${escapeHtml(q.category)}</span>` : ''}
+            ${q.group_id ? `<span class="question-tag question-group">Group ${q.group_id}</span>` : ''}
+          </div>
         </div>
         <div class="question-actions">
           <button class="upvote-btn" data-id="${q.id}">

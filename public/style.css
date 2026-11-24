@@ -87,3 +87,33 @@ input[type="text"] {
 .no-questions { color: #777; padding: 8px 0; }
 
 .upvote-btn:disabled { opacity: 0.6; cursor: default; }
+
+/* #20/#21 AI: categories and groups */
+.ai-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+#analyze-btn:disabled { opacity: 0.6; cursor: default; }
+
+.ai-status { color: #555; font-size: 0.9rem; }
+.ai-status.error { color: #c00; }
+
+.question-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.question-tag {
+  background: #e0e7ff;
+  color: #3730a3;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+}
+
+.question-group { background: #fef3c7; color: #92400e; }

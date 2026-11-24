@@ -35,7 +35,7 @@ router.post('/:code/questions', (req, res) => {
     .run(session.id, text);
 
   const question = db
-    .prepare('SELECT id, session_id, text, votes, created_at FROM questions WHERE id = ?')
+    .prepare('SELECT id, session_id, text, votes, category, group_id, created_at FROM questions WHERE id = ?')
     .get(result.lastInsertRowid);
 
   res.status(201).json(question);
@@ -52,7 +52,7 @@ router.get('/:code/questions', (req, res) => {
   // #6 Sort by votes: most voted first, then the most recent
   const questions = db
     .prepare(
-      `SELECT id, session_id, text, votes, created_at
+      `SELECT id, session_id, text, votes, category, group_id, created_at
        FROM questions
        WHERE session_id = ?
        ORDER BY votes DESC, created_at DESC, id DESC`
