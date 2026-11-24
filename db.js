@@ -20,4 +20,16 @@ db.exec(`
   );
 `);
 
+// Columns added in Sprint 2 (#9 answered, #11 closed, presenter key).
+// ALTER TABLE adds them also to a qa.sqlite created before this change.
+function addColumn(table, column, definition) {
+  const columns = db.prepare(`PRAGMA table_info(${table})`).all().map((c) => c.name);
+  if (!columns.includes(column)) {
+    db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
+  }
+}
+addColumn('sessions', 'presenter_key', 'TEXT');
+addColumn('sessions', 'closed', 'INTEGER NOT NULL DEFAULT 0');
+addColumn('questions', 'answered', 'INTEGER NOT NULL DEFAULT 0');
+
 module.exports = db;
