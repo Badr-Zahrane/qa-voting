@@ -117,3 +117,22 @@ input[type="text"] {
 }
 
 .question-group { background: #fef3c7; color: #92400e; }
+/* #9 Answered questions (participant and presenter view) */
+.question-item.answered .question-text { color: #888; }
+.answered-badge {
+  font-size: 0.8rem;
+  color: #16794c;
+  background: #e3f4ea;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-left: 6px;
+}
+
+/* Presenter view (#9, #10, #11) */
+.hint { color: #777; font-size: 0.9rem; }
+.presenter-actions { display: flex; gap: 6px; }
+.votes-badge { font-weight: bold; min-width: 48px; text-align: center; }
+button.secondary { background: #e5e7eb; color: #222; }
+button.secondary:hover { background: #d1d5db; }
+button.danger { background: #c62828; }
+button.danger:hover { background: #a61f1f; }

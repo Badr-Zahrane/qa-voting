@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presenter - Q&amp;A Voting</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <a href="/">&larr; Home</a>
+    <h1>Presenter view</h1>
+    <p id="presenter-error" class="error"></p>
+
+    <section>
+      <p>Participants join with this code:</p>
+      <p class="code" id="session-code"></p>
+      <p class="hint">or with the link <a id="participant-link" href="#"></a></p>
+      <p id="session-status"></p>
+      <!-- #11 Close session -->
+      <button id="close-btn" class="danger">Close session</button>
+    </section>
+
+    <!-- #9 Mark as answered, #10 Delete question -->
+    <section>
+      <h2>Questions</h2>
+      <ul id="questions-list"></ul>
+    </section>
+  </main>
+
+  <script src="js/presenter.js"></script>
+</body>
+</html>

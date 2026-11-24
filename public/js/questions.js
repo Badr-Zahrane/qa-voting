@@ -70,11 +70,11 @@ async function loadQuestions() {
 
     questions.forEach((q) => {
       const li = document.createElement('li');
-      li.className = 'question-item';
+      li.className = q.answered ? 'question-item answered' : 'question-item'; // #9
 
       li.innerHTML = `
         <div class="question-body">
-          <p class="question-text">${escapeHtml(q.text)}</p>
+          <p class="question-text">${escapeHtml(q.text)}${q.answered ? ' <span class="answered-badge">✓ Answered</span>' : ''}</p>
           <div class="question-meta">
             <small class="question-date">${new Date(q.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
             ${q.category ? `<span class="question-tag">${escapeHtml(q.category)}</span>` : ''}

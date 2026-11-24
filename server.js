@@ -5,6 +5,7 @@ const sessionsRouter = require('./routes/sessions');
 const questionsRouter = require('./routes/questions');
 const votesRouter = require('./routes/votes');
 const aiRouter = require('./routes/ai');
+const presenterRouter = require('./routes/presenter');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +18,7 @@ app.use('/api/sessions', sessionsRouter);   // #1, #2  (Badr)
 app.use('/api/sessions', questionsRouter);  // #3, #4  (Zaighum)
 app.use('/api/questions', votesRouter);     // #5, #6  (Stefano)
 app.use('/api/sessions', aiRouter);         // #20, #21 (Zaighum) - calls the ai-service
+app.use('/api/sessions', presenterRouter);  // #9, #10, #11 (Badr)
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

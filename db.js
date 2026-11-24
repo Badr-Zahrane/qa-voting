@@ -20,15 +20,18 @@ db.exec(`
   );
 `);
 
-// Columns added for the AI features (#20, #21). The migration also works on an
-// existing qa.sqlite, because CREATE TABLE IF NOT EXISTS does not change old tables.
-function addColumnIfMissing(table, column, definition) {
-  const columns = db.prepare(`PRAGMA table_info(${table})`).all();
-  if (!columns.some((c) => c.name === column)) {
+// Columns added in Sprint 2 (#9 answered, #11 closed, presenter key).
+// ALTER TABLE adds them also to a qa.sqlite created before this change.
+function addColumn(table, column, definition) {
+  const columns = db.prepare(`PRAGMA table_info(${table})`).all().map((c) => c.name);
+  if (!columns.includes(column)) {
     db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
   }
 }
-addColumnIfMissing('questions', 'category', 'TEXT');    // #21 topic assigned by the AI
-addColumnIfMissing('questions', 'group_id', 'INTEGER'); // #20 group of similar questions (per session)
+addColumn('sessions', 'presenter_key', 'TEXT');
+addColumn('sessions', 'closed', 'INTEGER NOT NULL DEFAULT 0');
+addColumn('questions', 'answered', 'INTEGER NOT NULL DEFAULT 0');
+addColumn('questions', 'category', 'TEXT');    // #21 topic assigned by the AI
+addColumn('questions', 'group_id', 'INTEGER'); // #20 group of similar questions (per session)
 
 module.exports = db;
