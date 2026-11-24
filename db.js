@@ -31,5 +31,7 @@ function addColumn(table, column, definition) {
 addColumn('sessions', 'presenter_key', 'TEXT');
 addColumn('sessions', 'closed', 'INTEGER NOT NULL DEFAULT 0');
 addColumn('questions', 'answered', 'INTEGER NOT NULL DEFAULT 0');
+addColumn('questions', 'category', 'TEXT');    // #21 topic assigned by the AI
+addColumn('questions', 'group_id', 'INTEGER'); // #20 group of similar questions (per session)
 
 module.exports = db;

@@ -39,7 +39,7 @@ router.post('/:code/questions', (req, res) => {
     .run(session.id, text);
 
   const question = db
-    .prepare('SELECT id, session_id, text, votes, answered, created_at FROM questions WHERE id = ?')
+    .prepare('SELECT id, session_id, text, votes, answered, category, group_id, created_at FROM questions WHERE id = ?')
     .get(result.lastInsertRowid);
 
   res.status(201).json(question);
@@ -57,7 +57,7 @@ router.get('/:code/questions', (req, res) => {
   // #9 Answered questions go to the bottom.
   const questions = db
     .prepare(
-      `SELECT id, session_id, text, votes, answered, created_at
+      `SELECT id, session_id, text, votes, answered, category, group_id, created_at
        FROM questions
        WHERE session_id = ?
        ORDER BY answered ASC, votes DESC, created_at DESC, id DESC`

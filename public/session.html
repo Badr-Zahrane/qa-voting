@@ -24,6 +24,11 @@
     <!-- #4 See all questions (Zaighum) + #5/#6 votes (Stefano) -->
     <section>
       <h2>Questions</h2>
+      <!-- #20/#21 AI: categories by topic + grouping of similar questions (Zaighum) -->
+      <div class="ai-bar">
+        <button type="button" id="analyze-btn">&#10024; Analyze with AI</button>
+        <span id="ai-status" class="ai-status"></span>
+      </div>
       <ul id="questions-list"></ul>
     </section>
   </main>
@@ -31,5 +36,6 @@
   <!-- The session code is in the URL: session.html?code=AB12 -->
   <script src="js/session.js"></script>
   <script src="js/questions.js"></script>
+  <script src="js/ai.js"></script>
 </body>
 </html>
